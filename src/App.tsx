@@ -1,122 +1,87 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import { AppLayout, type TabId } from "@/components/layout/AppLayout";
+import { useToast } from "@/hooks/useToast";
+import { TabTransacoes } from "@/features/transactions";
+import { TabCedentes } from "@/features/cedentes";
+import { TabCambio } from "@/features/currencies";
+import { TabSimulador } from "@/features/simulator";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState<TabId>("transacoes");
+  const [showReceivableModal, setShowReceivableModal] = useState(false);
+  const { toast, showToast } = useToast();
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <AppLayout
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+      onOpenReceivableModal={() => setShowReceivableModal(true)}
+      toast={toast}
+    >
+      {activeTab === "transacoes" && <TabTransacoes />}
+      {activeTab === "cedentes" && <TabCedentes />}
+      {activeTab === "cambio" && <TabCambio />}
+      {activeTab === "simulador" && <TabSimulador />}
+
+      {showReceivableModal && (
+        <div
+          onClick={() => setShowReceivableModal(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.35)",
+            display: "grid",
+            placeItems: "center",
+            zIndex: 50,
+          }}
         >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "#fff",
+              borderRadius: 8,
+              padding: 20,
+              maxWidth: 400,
+              width: "100%",
+            }}
+          >
+            <h2 style={{ margin: "0 0 12px", fontSize: 16 }}>
+              Cadastrar tipo de recebível
+            </h2>
+            <p style={{ color: "var(--text-muted)", fontSize: 13, margin: 0 }}>
+              Em breve — formulário de cadastro de tipo de recebível.
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: 16,
+              }}
+            >
+              <button
+                onClick={() => {
+                  setShowReceivableModal(false);
+                  showToast("Modal fechado");
+                }}
+                style={{
+                  fontFamily: "inherit",
+                  fontSize: 13,
+                  padding: "7px 14px",
+                  borderRadius: 5,
+                  cursor: "pointer",
+                  background: "#1a1a1a",
+                  color: "#fff",
+                  border: "none",
+                }}
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      )}
+    </AppLayout>
+  );
 }
 
-export default App
+export default App;
