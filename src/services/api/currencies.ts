@@ -8,7 +8,7 @@ export const getCurrencies = async (): Promise<Currency[]> => {
 
 export const updateCurrencyRate = async (
   code: string,
-  rate: number,
+  rate: string,
 ): Promise<Currency> => {
   const res = await client.put<Currency>(`/currencies/${code}/rate`, { rate });
   return res.data;
