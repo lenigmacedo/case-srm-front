@@ -74,6 +74,7 @@ export function TabSimulador() {
   const [resultado, setResultado] = useState<SimulateResponse | null>(null);
   const [lastRequest, setLastRequest] = useState<SimulateRequest | null>(null);
   const [lastCedenteId, setLastCedenteId] = useState("");
+  const [formKey, setFormKey] = useState(0);
 
   const handleSimulate = (data: SimulateRequest) => {
     setLastRequest(data);
@@ -106,6 +107,7 @@ export function TabSimulador() {
           setResultado(null);
           setLastRequest(null);
           setLastCedenteId("");
+          setFormKey((k) => k + 1);
         },
         onError: () => showToast("Erro ao liquidar. Tente novamente."),
       },
@@ -133,6 +135,7 @@ export function TabSimulador() {
         {formReady && (
           <div style={simGrid}>
             <FormSimulacao
+              key={formKey}
               cedentes={cedentes ?? []}
               receivableTypes={receivableTypes ?? []}
               currencies={currencies ?? []}
