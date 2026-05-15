@@ -78,10 +78,11 @@ export interface StatementFilter {
 }
 
 export interface StatementResponse {
-  data: Transaction[];
+  items: Transaction[];
   total: number;
   page: number;
   limit: number;
+  pages: number;
 }
 
 export interface ApiError {
