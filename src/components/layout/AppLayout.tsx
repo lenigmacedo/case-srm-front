@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Button, Toast } from "@/components/ui";
+import { Toast } from "@/components/ui";
 
 export type TabId = "transacoes" | "cedentes" | "cambio" | "simulador";
 
@@ -13,7 +13,6 @@ const TABS: { id: TabId; label: string }[] = [
 interface Props {
   activeTab: TabId;
   onTabChange: (tab: TabId) => void;
-  onOpenReceivableModal: () => void;
   toast: string | null;
   children: ReactNode;
 }
@@ -21,7 +20,7 @@ interface Props {
 export function AppLayout({
   activeTab,
   onTabChange,
-  onOpenReceivableModal,
+
   toast,
   children,
 }: Props) {
@@ -42,11 +41,6 @@ export function AppLayout({
           <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
             Painel do Operador
           </div>
-        </div>
-        <div>
-          <Button variant="ghost" onClick={onOpenReceivableModal}>
-            + Cadastrar tipo de recebível
-          </Button>
         </div>
       </header>
 
