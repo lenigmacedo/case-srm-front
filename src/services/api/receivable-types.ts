@@ -4,7 +4,7 @@ import client from "./client";
 export interface CreateReceivableTypeData {
   code: string;
   name: string;
-  spread_monthly: number;
+  spread_monthly: string;
 }
 
 export const getReceivableTypes = async (): Promise<ReceivableType[]> => {
