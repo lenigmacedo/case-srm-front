@@ -1,13 +1,19 @@
 import type { ReactNode } from "react";
 import { Toast } from "@/components/ui";
 
-export type TabId = "transacoes" | "cedentes" | "cambio" | "simulador";
+export type TabId =
+  | "transacoes"
+  | "cedentes"
+  | "cambio"
+  | "simulador"
+  | "recebiveis";
 
 const TABS: { id: TabId; label: string }[] = [
   { id: "simulador", label: "Simulador" },
   { id: "transacoes", label: "Transações" },
   { id: "cedentes", label: "Cedentes" },
   { id: "cambio", label: "Câmbio" },
+  { id: "recebiveis", label: "Recebíveis" },
 ];
 
 interface Props {
