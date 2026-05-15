@@ -5,7 +5,6 @@ export interface Cedente {
   cnpj: string;
   name: string;
   risk_tier: RiskTier;
-  created_at: string;
 }
 
 export interface Currency {
