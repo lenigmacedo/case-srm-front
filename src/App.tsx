@@ -7,7 +7,7 @@ import { TabCambio } from "@/features/currencies";
 import { TabSimulador } from "@/features/simulator";
 
 function App() {
-  const [activeTab, setActiveTab] = useState<TabId>("transacoes");
+  const [activeTab, setActiveTab] = useState<TabId>("simulador");
   const [showReceivableModal, setShowReceivableModal] = useState(false);
   const { toast, showToast } = useToast();
 
@@ -18,10 +18,10 @@ function App() {
       onOpenReceivableModal={() => setShowReceivableModal(true)}
       toast={toast}
     >
+      {activeTab === "simulador" && <TabSimulador />}
       {activeTab === "transacoes" && <TabTransacoes />}
       {activeTab === "cedentes" && <TabCedentes />}
       {activeTab === "cambio" && <TabCambio />}
-      {activeTab === "simulador" && <TabSimulador />}
 
       {showReceivableModal && (
         <div

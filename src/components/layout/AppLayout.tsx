@@ -4,10 +4,10 @@ import { Button, Toast } from "@/components/ui";
 export type TabId = "transacoes" | "cedentes" | "cambio" | "simulador";
 
 const TABS: { id: TabId; label: string }[] = [
+  { id: "simulador", label: "Simulador" },
   { id: "transacoes", label: "Transações" },
   { id: "cedentes", label: "Cedentes" },
   { id: "cambio", label: "Câmbio" },
-  { id: "simulador", label: "Simulador" },
 ];
 
 interface Props {
