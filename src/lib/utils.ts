@@ -49,6 +49,19 @@ export const fmtCNPJ = (cnpj: string): string => {
 
 export const stripCNPJ = (cnpj: string): string => cnpj.replace(/\D/g, "");
 
+export const maskBRL = (value: string): string => {
+  const digits = value.replace(/\D/g, "");
+  if (!digits) return "";
+  const num = parseInt(digits, 10) / 100;
+  return num.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
+
+export const stripBRL = (value: string): string =>
+  value.replace(/\./g, "").replace(",", ".");
+
 export const maskCNPJ = (value: string): string => {
   const d = value.replace(/\D/g, "").slice(0, 14);
   if (d.length <= 2) return d;
