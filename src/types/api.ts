@@ -46,14 +46,16 @@ export interface SimulateRequest {
 export interface SimulateResponse {
   face_value: string;
   present_value: string;
-  present_value_converted: string;
-  spread_monthly: string;
-  base_rate: string;
-  discount_factor: string;
+  present_value_brl: string;
   discount_amount: string;
-  fx_rate: string;
+  discount_rate: string;
+  spread_monthly: string;
+  base_rate_monthly: string;
+  fx_rate: string | null;
   origin_currency: string;
   payment_currency: string;
+  term_days: number;
+  due_date: string;
 }
 
 export interface LiquidateRequest {

@@ -6,3 +6,4 @@ export { Card } from "./Card";
 export { Modal } from "./Modal";
 export { Toast } from "./Toast";
 export { Label } from "./Label";
+export { Spinner } from "./Spinner";
